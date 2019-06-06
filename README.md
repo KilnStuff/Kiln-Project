@@ -4,6 +4,32 @@
   
   ## Table of Contents
 * [List of Components](https://github.com/KilnStuff/Kiln-Project#list-of-components)
+* [Design](https://github.com/KilnStuff/Kiln-Project#design)
+* [Building Process](https://github.com/KilnStuff/Kiln-Project#building-process)
+* [Designing A PID](https://github.com/KilnStuff/Kiln-Project#designing-a-pid)
+* [Finished Product and Data](https://github.com/KilnStuff/Kiln-Project#finished-product-and-data)
+* [Contributors](https://github.com/KilnStuff/Kiln-Project#contributors)
 
 
 # List of Components
+
+
+
+
+# Design
+
+
+
+# Building Process
+
+
+
+# Designing a PID
+
+
+
+# Finished Product and Data
+
+
+
+# Contributors
