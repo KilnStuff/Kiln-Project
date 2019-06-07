@@ -2,7 +2,7 @@
 
   In this guide we will detail our process and design for an electronic temperature controlled kiln. The goal of this project was to convert a manual temperature controlled kiln, which originally set the temperature by means of a knob, to a much more sophisticated electronic control system that could drive the kiln to a specific temperature based on thermocouple feedback. This project required us to wire and build the system from scratch, with the only previously constructed components being the kiln itself and our means to electronically communicate with the kiln, a raspberry pi (as well as peripherals for the pi).
   
-  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142748.jpg)
+  ![alt text]
   
   ## Table of Contents
 * [List of Components](https://github.com/KilnStuff/Kiln-Project#list-of-components)
@@ -43,7 +43,7 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
 
   Since the actual coils inside the kiln are powered by AC current from the wall, but the pi is powered/communicates through DC the way we chose to limit the power reaching the kiln was through solid state relays. These relays are connected to the wall at 240 V and on the other side to the pi at 5V. These relays are "always open", so AC will only pass through if the pi is applying a DC current. They are also "zero crossing", so they will only start/stop transmitting AC when its phase corresponds to when the wall voltage is at 0. This allows for a type of PWM (Pulse Width Modulation) for the kiln, where we can control the amount of power entering within a given time frame by limiting the amount of time the coils are on within a period. Below is the schematic for the AC current side:
   
-  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/AC%20Schematic.png)
+  ![alt text]
   
   As long as the Hot Wires are properly matched it doesn't matter which is connected to each end of the plug/SSR (They both alternate between +120 and -120 with a 180 degree phase shift). Each black/white wire forms a loop with the coil inside the kiln, so we only needed to attach the SSR across one wire (we chose the black wire). Hence the circuit is open when the SSR is open (no current applied on DC side) and closed if the SSR is closed (DC current is applied by pi). There is a transformer which transforms the wall power to a 5V power supply connected to the SSR's. The other terminal of the DC side on the SSR is connected to a transistor which ensures the circuit is open until the Pi applies power. The exact circuit is described firther down in this section. Another point to note on the above diagram is that for simplicity sake only 1 SSR is wired (and only 1 wire plugged into the kiln). However in reality all 3 wires are connected to the SSR and kiln in the exact same fashion as shown in the diagram above. Pictures of the breaker box and box with the relays are below:
   
