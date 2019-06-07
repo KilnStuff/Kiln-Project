@@ -22,7 +22,7 @@
   *
   
   ## DC/Pi Components
-  *
+  * Adafruit Perma-Proto
   *
   *
 
