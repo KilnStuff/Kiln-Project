@@ -31,7 +31,7 @@
   * High Temperature k-type Thermocouple Sensor (~30)
   * Solid State Relay SSR-25 DA 25A x3 (~$10 each)
   * Adafruit Thermocouple Amplifier MAX31855 x3 (~$16 each)
-  * 2N2222 to-92 Transistor NPN 40V 600mA 300MHz 625mW (~$7)
+  * 2N2222 to-92 Transistor NPN 40V 600mA 300MHz 625mW x3 (~$7 total for 200)
   * ABS Junction Box Universal Project Enclosure (~$11)
   * MEANWELL Switching Power Supplies 50W 5V 10A (~$20)
   * Eaton CHF215 Plug-On Mount Type CHF Circuit Breaker 15A (~$20)
@@ -43,6 +43,12 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
   Since the actual coils inside the kiln are powered by AC current from the wall, but the pi is powered/communicates through DC the way we chose to limit the power reaching the kiln was through solid state relays. These relays are connected to the wall at 240 V and on the other side to the pi at 5V. These relays are "always open", so AC will only pass through if the pi is applying a DC current. They are also "zero crossing", so they will only start/stop transmitting AC when its phase corresponds to when the wall voltage is at 0. This allows for a type of PWM (Pulse Width Modulation) for the kiln, where we can control the amount of power entering within a given time frame by limiting the amount of time the coils are on within a period. Below is the schematic for the AC current side:
   
   ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/AC%20Schematic.png)
+  
+  As long as the Hot Wires are properly matched it doesn't matter which is which (They both alternate between +120 and -120 with a 180 degree phase shift). Each black/white wire forms a loop with the coil inside the kiln, so we only needed to attach the SSR across one wire (we chose the black wire). Hence the circuit is open when the SSR is open (no current applied on DC side) and closed if the SSR is closed (DC current is applied by pi). There is a transformer which transforms the wall power to a 5V power supply connected to the SSR's. The other terminal of the DC side on the SSR is connected to a transistor which ensures the circuit is open until the Pi applies power. The exact circuit is described firther down in this section. Another point to note on the above diagram is that for simplicity sake only 1 SSR is wired (and only 1 wire plugged into the kiln). However in reality all 3 wires are connected to the SSR and kiln in the exact same fashion as shown in the diagram above. Pictures of the breaker box and box with the relays are below:
+  
+  ![alt text]
+  
+  ![alt text]
 
 # Building Process
 
