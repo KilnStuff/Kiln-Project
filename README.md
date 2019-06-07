@@ -18,18 +18,23 @@
   
   ## AC Components
   * Cutler Hammer CH220 Circuit Breaker x3 (~$14 each)
-  * Cable SEOOW, Black Outer Insulation, 8 Gauge, 3 Wires, 10 ft. ($27)
-  * Cable SJTW, Orange Outer Insulation, 12 Gauge, 3 Wires, 25 ft. ($32)
-  * Eaton Type CH 16-Circuit 125-Amp Main Lug Load Center ($44)
-  * Red 8 Gauge Heat Shrink Butt Connectors ($20)
+  * Cable SEOOW, Black Outer Insulation, 8 Gauge, 3 Wires, 10 ft. (~$27)
+  * Cable SJTW, Orange Outer Insulation, 12 Gauge, 3 Wires, 25 ft. (~$32)
+  * Eaton Type CH 16-Circuit 125-Amp Main Lug Load Center (~$44)
+  * Red 8 Gauge Heat Shrink Butt Connectors (~$20)
+  * MURRAY ECLX071M Siemens Eclx Ground Bar Kit x2 (~$8 each)
+  * BUD Industries JBH-4956-KO Steel NEMA 1 Sheet Metal Box (~$17)
   
   
   ## DC/Pi Components
   * Adafruit Perma-Proto HAT for Pi Mini Kit (~$9)
   * High Temperature k-type Thermocouple Sensor (~30)
-  * Solid State Relay SSR-25 DA 25A x3 ($10)
-  * Adafruit Thermocouple Amplifier MAX31855 x3 ($16)
-  * 2N2222 to-92 Transistor NPN 40V 600mA 300MHz 625mW ($7)
+  * Solid State Relay SSR-25 DA 25A x3 (~$10 each)
+  * Adafruit Thermocouple Amplifier MAX31855 x3 (~$16 each)
+  * 2N2222 to-92 Transistor NPN 40V 600mA 300MHz 625mW (~$7)
+  * ABS Junction Box Universal Project Enclosure (~$11)
+  * MEANWELL Switching Power Supplies 50W 5V 10A (~$20)
+  * Eaton CHF215 Plug-On Mount Type CHF Circuit Breaker 15A (~$20)
 
 
 
