@@ -2,7 +2,7 @@
 
   In this guide we will detail our process and design for an electronic temperature controlled kiln. The goal of this project was to convert a manual temperature controlled kiln, which originally set the temperature by means of a knob, to a much more sophisticated electronic control system that could drive the kiln to a specific temperature based on thermocouple feedback. This project required us to wire and build the system from scratch, with the only previously constructed components being the kiln itself and our means to electronically communicate with the kiln, a raspberry pi (as well as peripherals for the pi).
   
-  ![alt text]
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142748.jpg)
   
   ## Table of Contents
 * [List of Components](https://github.com/KilnStuff/Kiln-Project#list-of-components)
@@ -48,9 +48,16 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
   As long as the Hot Wires are properly matched it doesn't matter which is connected to each end of the plug/SSR (They both alternate between +120 and -120 with a 180 degree phase shift). Each black/white wire forms a loop with the coil inside the kiln, so we only needed to attach the SSR across one wire (we chose the black wire). Hence the circuit is open when the SSR is open (no current applied on DC side) and closed if the SSR is closed (DC current is applied by pi). There is a transformer which transforms the wall power to a 5V power supply connected to the SSR's. The other terminal of the DC side on the SSR is connected to a transistor which ensures the circuit is open until the Pi applies power. The exact circuit is described firther down in this section. Another point to note on the above diagram is that for simplicity sake only 1 SSR is wired (and only 1 wire plugged into the kiln). However in reality all 3 wires are connected to the SSR and kiln in the exact same fashion as shown in the diagram above. Pictures of the breaker box and box with the relays are below:
   
   ## Closed Breaker Box/Open Breaker Box
-  ![alt text]
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142810.jpg)
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142917.jpg)
   
-  ![alt text]
+  ## Wiring of Breaker Box
+  
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_143202.jpg)
+  
+  ## Wiring of SSR's
+  
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142939.jpg)
 
 # Building Process
 
