@@ -17,14 +17,19 @@
   As previously stated the only components that were preassembled were a raspberry pi and the kiln with manual controls. The remaining parts that we used are listed below in two categories: those whose purpose was to house/contain/transmit AC current, and those used to communicate with the pi through DC current (or deal exclusively with the pi). The purpose and function of these parts are explained throughout the Design and Building Process sections.
   
   ## AC Components
-  *
-  *
-  *
+  * Cutler Hammer CH220 Circuit Breaker x3 (~$14 each)
+  * Cable SEOOW, Black Outer Insulation, 8 Gauge, 3 Wires, 10 ft. ($27)
+  * Cable SJTW, Orange Outer Insulation, 12 Gauge, 3 Wires, 25 ft. ($32)
+  * Eaton Type CH 16-Circuit 125-Amp Main Lug Load Center ($44)
+  * Red 8 Gauge Heat Shrink Butt Connectors ($20)
+  
   
   ## DC/Pi Components
-  * Adafruit Perma-Proto
-  *
-  *
+  * Adafruit Perma-Proto HAT for Pi Mini Kit (~$9)
+  * High Temperature k-type Thermocouple Sensor (~30)
+  * Solid State Relay SSR-25 DA 25A x3 ($10)
+  * Adafruit Thermocouple Amplifier MAX31855 x3 ($16)
+  * 2N2222 to-92 Transistor NPN 40V 600mA 300MHz 625mW ($7)
 
 
 
