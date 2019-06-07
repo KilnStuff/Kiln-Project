@@ -42,7 +42,7 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
 
   Since the actual coils inside the kiln are powered by AC current from the wall, but the pi is powered/communicates through DC the way we chose to limit the power reaching the kiln was through solid state relays. These relays are connected to the wall at 240 V and on the other side to the pi at 5V. These relays are "always open", so AC will only pass through if the pi is applying a DC current. They are also "zero crossing", so they will only start/stop transmitting AC when its phase corresponds to when the wall voltage is at 0. This allows for a type of PWM (Pulse Width Modulation) for the kiln, where we can control the amount of power entering within a given time frame by limiting the amount of time the coils are on within a period. Below is the schematic for the AC current side:
   
-  
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/AC%20Schematic.png)
 
 # Building Process
 
