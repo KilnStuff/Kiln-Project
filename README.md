@@ -8,6 +8,7 @@
 * [List of Components](https://github.com/KilnStuff/Kiln-Project#list-of-components)
 * [Design](https://github.com/KilnStuff/Kiln-Project#design)
 * [Building Process](https://github.com/KilnStuff/Kiln-Project#building-process)
+* [Code](https://github.com/KilnStuff/Kiln-Project#Code)
 * [Designing A PID](https://github.com/KilnStuff/Kiln-Project#designing-a-pid)
 * [Finished Product and Data](https://github.com/KilnStuff/Kiln-Project#finished-product-and-data)
 * [Contributors](https://github.com/KilnStuff/Kiln-Project#contributors)
@@ -96,8 +97,14 @@ Here's the wiring diagram:
 
 # Building Process
 
-There were several considerations that needed to be taken into account when constructing this project. To allow for port holes to still be accessible so that we could look inside the kiln, we needed to drill additional holes for the thermocouples. If instead we put the thermocouples in the normal port holes, then our temperature control system would think the temperature in the kiln had drastically decreased when we take a thermocouple out to look inside, therefore driving the power way up inside the kiln (when in fact is does not need to). However while drilling these new holes we had to take into account that we were drilling fire brick, so we needed to take special consideration.
+There were several considerations that needed to be taken into account when constructing this project. To allow for port holes to still be accessible so that we could look inside the kiln, we needed to drill additional holes for the thermocouples. If instead we put the thermocouples in the normal port holes, then our temperature control system would think the temperature in the kiln had drastically decreased when we take a thermocouple out to look inside, therefore driving the power way up inside the kiln (when in fact is does not need to). However while drilling these new holes we had to take into account that we were drilling fire brick, so we needed to take special consideration. (MORE TEXT)
 
+
+Here are the 1/2 inch holes we drilled for the thermocouples:
+
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_143416.jpg)
+
+# Code
 
 # Designing a PID
 
