@@ -64,7 +64,7 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
   
 The wiring of the Raspberry Pi’s hat is separated into two separate circuits. One circuit is what controls the SSRs through the GPIO pins, and the other circuit communicates with the thermocouple amplifier boards to read off the temperature.
   
-SSR Circuit-
+**SSR Circuit**
 
 To run SSRs of the type we are using, the 3.3V supplied directly from the pi’s GPIO pins is insufficient to fully close the SSRs and have them allow current through. Instead, a 5V supply must be used, but because the Pi does not support 5V directly from the GPIO, transistors must be used instead.
 
@@ -74,7 +74,7 @@ In this system, when the GPIO is supplying voltage to the base of the transistor
 
 Meanwhile, on the AC side of the SSRs, one leg of the AC side is connected directly to the coil, while the other leg connects to one of the lines coming from the breaker. The other line goes directly from the breaker to the coil. This circuit allows current to pass through the SSR only when the GPIO is supplying voltage to the transistor, and therefore the power supply is in turn supplying voltage to the SSR.
 
-Thermocouple Circuit-
+**Thermocouple Circuit**
 
 The thermocouples have two sides, a thermocouple side which connects the board to the thermocouple, and a Pi side which connects the board to the Pi. The thermocouple side is straightforward, the positive wire of the thermocouple connects to the positive screw terminal, and the negative side to the negative screw terminal. These should of course be marked on the board and the thermocouple, but when in doubt check the data sheets to make sure which is which. If connected backwards, the thermocouple will read a reduction in temperature rather than an increase.
 
