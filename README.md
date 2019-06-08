@@ -71,13 +71,43 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
 
 # Building Process
 
+There were several considerations that needed to be taken into account when constructing this project. To allow for port holes to still be accessible so that we could look inside the kiln, we needed to drill additional holes for the thermocouples. If instead we put the thermocouples in the normal port holes, then our temperature control system would think the temperature in the kiln had drastically decreased when we take a thermocouple out to look inside, therefore driving the power way up inside the kiln (when in fact is does not need to). However while drilling these new holes we had to take into account that we were drilling fire brick, so we needed to take special consideration.
 
 
 # Designing a PID
 
+Getting Coefficients
 
+While trying to create the best PID for our system, we tried 3 different methods, each with different results. A slight inconvenience to our system was that the 3rd zone on the kiln (the one lowest to the ground) was significantly slower at ramping its power than the above 2 zones. The last 2 PID's take this into account in different ways.
+
+## Aggressive PID
+
+The first PID we tried was to have each zone independently attempt to reach the desired temperature as fast as possible. Essentially each zone used its own thermocouple to measure how fast it should try and reach the target temperature. However, as stated above, the 3rd zone was significantly slower to ramp than the other two, leading to a fairly large temperature gradient across the kiln. When making ceramics, this can lead to issues them not being properly fired, leading to possible cracks or not being fully heated. We called this method the "Aggressive PID" since it just ramps as fast as it can in each zone to the desired temperature. Below is a graph of one such firing:
+
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/test2_5_31.png)
+
+Oscillations in the PID are very small, since the time scale is very large (it take many hours to heat a kiln to desired temperature) but also when a zone's coil turns off, it dissipates a lot of heat to the environment (temperature difference between the kiln and outside is very large). So there is very little overshoot after reaching the desired temperature, and hence the amplitude of oscillations are very small (as seen in the graph above). However, to try and address the large temperature gradient, we needed to attempt a new PID system.
+
+## Couple to Slowest
+
+Our next iteration of the PID had each zone "couple" to the slowest zone (zone 3), while zone 3 ramped as fast as possible to the desired temperature. This meant that zones 1 and 2 set their desired temperature to the current temperature of zone 3. The main issue we observed with this version however was that at high temperatures, the actual temperature seemed to "droop" below the desired temperature, as seen below:
+
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/figure_1.png)
+
+Our theory for this was that the bottom zone on its own could not ramp up to our desired temperatures (above 1000 C). It requires the top two zones to provide enough power/heat to drive the bottom zone to our desired temp. Since the upper 2 zones are always coupled to the bottom zone, then they can only move as fast as the bottom zone ramps. This lead to us designing a hybrid between the "Aggressive PID" and "Couple to Slowest PID".
+
+## Decoupling at Low Rate of Change
+
+Our last iteration (and solution to the "drooping" issue) was to have the upper 2 zones initially couple to the slowest zone. However, once the last zone's rate of change dropped below one degree per minute, we had the upper two zones "decouple", meaning they would essentially just ramp their power to acheive the desired temperature as fast as possible. This is seen in the graph below:
+
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/figure_2.png)
+
+The main issue with this version of the PID was that the upper 2 zones were roughly 20 degrees ahead of the bottom zone. However, compared to the over 100 degree difference between zones 1 and 3 of the "aggressive PID", and the ability to ramp past 1000 C unlike the "Couple to Slowest PID", our last iteration did remarkably well, and it is the version we currently implement. 
+
+In addition to the PID we also implemented "firing schedules", which give an array of desired temperatures the PID should set as its goal for a given time. These live in the form of a text file that the PID calls upon to reference. These firing schedules allow us to tailor our PID to the specific type of firing we desire, such as a bisque or glaze firing (which have different desired final temperatures). The code for the bisque and glaze firing schedules, as well as each PID are within the repository. 
 
 # Finished Product and Data
+
 
 
 
