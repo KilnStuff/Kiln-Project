@@ -140,7 +140,7 @@ The main issue with this version of the PID was that the upper 2 zones were roug
 
 In addition to the PID we also implemented "firing schedules", which give an array of desired temperatures the PID should set as its goal for a given time. These live in the form of a text file that the PID calls upon to reference. These firing schedules allow us to tailor our PID to the specific type of firing we desire, such as a bisque or glaze firing (which have different desired final temperatures). The code for the bisque and glaze firing schedules, as well as each PID are within the repository. 
 
-Another issue we encountered at high temperatures was the thermocouples shorting to ground the vast majority of measurements. 
+Another issue we encountered at high temperatures was the thermocouples shorting to ground the vast majority of measurements, although any measurements that did go through were perfectly fine. We believe this is because at high temperatures the voltage detected by the thermo board is small and therefore heavily affected by noise. In the future, we would use either shorter or shielded/twisted thermocouple wires and keep the wires away from the rest of the electronics to try to minimize this noise.
 
 # Finished Product
 
