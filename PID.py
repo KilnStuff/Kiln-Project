@@ -8,13 +8,14 @@ import digitalio
 import adafruit_max31855
 import RPi.GPIO as gpio
 
-zones = np.array([17,27,23])   #pin number of each zone  (1,2,3)
+zones = np.array([17,27,23])   #pin number on pi that controls each zone  (1,2,3)
 
+#setup to turn on off the gpio to control relays
 gpio.setmode(gpio.BCM)
 for z in zones:
     gpio.setup(int(z), gpio.OUT)
 
- 
+ #setup for themocoulple boards
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 cs1 = digitalio.DigitalInOut(board.D4)
 cs2 = digitalio.DigitalInOut(board.D25)
@@ -25,8 +26,9 @@ thermo2 = adafruit_max31855.MAX31855(spi, cs2)
 thermo3 = adafruit_max31855.MAX31855(spi, cs3)
 
 #################################################################################################
-#imputs
-
+#inputs
+#gets the file name of the firing shcedule to use
+#if nothin is typed it allow you to enter a fixed setpoint value
 setFileName = input("Enter file name of the firing schedule(press enter to use fixed value)\n")
 if setFileName == "":
     setFile = False
@@ -40,15 +42,19 @@ if setFileName == "":
 else:
     setFile = True
 
+ #reads setpint file   
 if setFile == True:
     setData = np.transpose(np.loadtxt(setFileName, delimiter = ',', skiprows = 1))
-
+# get file name to record data to
 fileName = input("Enter file name to write to(press enter to not record data to textfile)\n")
 if fileName == "":
     textfile = False
 else:
     textfile = True
 
+# sets up text file for data 
+# first line is the file name of the firing shceluel
+#if no shceduel setpont is recorded on the secound line
 if textfile == True:
     Out = open(fileName,'w')
     if setFile == False:
@@ -63,30 +69,32 @@ if textfile == True:
 #################################################################################
 #setup for loop
 
-sampleRate = 1
-updateRate = 5
-powerCycle = 2
+sampleRate = 1 #seconds between temperature measurements
+updateRate = 5 #seconds between power updates
+powerCycle = 2 #length in seconds of on on off cycle of coils
 
-allowedFailTime = 5*60
-fail1 = False
+allowedFailTime = 5*60   #allowed time for a themocouple to be broken befor the kiln shuts off
+fail1 = False  # set to true when a thermocouple has a faulty reading
 fail2 = False
 fail3 = False
 
-#zones follow zone 3
-slowZone = np.array([3,1,2])   #index will be slowZone-1
-minRamp = 1/60
+#the slowzone array is the ordering of how fast each zone can heat with respect to the others
+#the fist element is the number of the slowest zone and the last is the fastest'
+#this is used to decide which zone is followed
+slowZone = np.array([3,1,2])   #  index will be slowZone-1
+minRamp = 1/60   # minimum ramp rate where the zones become uncoupled
 
-P = np.array([260,260,137])
-I = np.array([2.6,2.6,1.37])
-D = np.array([26,26,13.7])/2
+P = np.array([260,260,137])    #porportion constant
+I = np.array([2.6,2.6,1.37])   #integral constant
+D = np.array([26,26,13.7])/2   #derivitive constant
 
-boxLen = 20
-rampBoxLen = 40
-maxPower = np.array([2618,2618,1371]) 
-kout = np.array([2.76,.6,1.05])
-maxIntErr = maxPower/I
-intErrBound = 25
-roomTemp = 25
+boxLen = 20   #number of perivious pionts to use in caluculation of the derivitive term
+rampBoxLen = 40    #number of perivious pionts to use in caluculation of the current ramp rate
+maxPower = np.array([2618,2618,1371])   # max power each zone can deliver
+kout = np.array([2.76,.6,1.05])    #disiapative coeffefitents
+maxIntErr = maxPower/I  # max value of the integral  helps avoid integral windup
+intErrBound = 25            # the integral is only summed when the error is less than this value
+roomTemp = 25           
 
 temps = np.array([[],[],[]])
 err = np.array([0.,0.,0.])
@@ -96,9 +104,9 @@ derErr = np.array([0.,0.,0.])
 ramp = np.array([0.,0.,0.])
 ts = np.array([])
 power  = np.array([0.,0.,0.])
-powerRatio = np.array([0.,0.,0.])
-boolOn = np.array([False,False,False])
-setPoints = np.array([0.,0.,0.])
+powerRatio = np.array([0.,0.,0.])         # ratio of the powerneeded vs max power
+boolOn = np.array([False,False,False])         #keeps track of wether or not a coil is on
+setPoints = np.array([0.,0.,0.])           #setpints for each zone
 
 tstart = time.perf_counter()
 #begin PID loop
@@ -107,10 +115,10 @@ t = -sampleRate  #ensures first loop measures temp
 updateTime = tstart-updateRate  #ensures first loop updates power
 
 
-tOff = np.array([0,0,0]) + tstart
-tOn = np.array([0,0,0]) + tstart
-timeOff = np.array([0,0,0]) + tstart
-timeOn = np.array([0,0,0]) + tstart
+tOff = np.array([0,0,0]) + tstart   #time the coil was turned off at
+tOn = np.array([0,0,0]) + tstart    #time the coil was turned on at
+timeOff = np.array([0,0,0]) + tstart    #time the coil is supposed to be off for
+timeOn = np.array([0,0,0]) + tstart      #time the coil is supposed to be on for
 
 while True:
     ###################################################################
@@ -137,6 +145,8 @@ while True:
     #temp aquisition
     if (time.perf_counter() - tstart)-t >= sampleRate-.0069:
         
+        # measures temp of each zone. returns back to the top of the loop if an error is thrownwhile reading a themocouple
+        #themo1
         try:
             temp1 = thermo1.temperature
             fail1 = False
@@ -153,7 +163,7 @@ while True:
                     break
             continue
         
-       
+       #themo2
         try:
             temp2 = thermo2.temperature
             fail2 = False
@@ -169,7 +179,8 @@ while True:
                     print("Exiting PID loop")
                     break
             continue
-                      
+            
+        #themo3              
         try:
             temp3 = thermo3.temperature
             fail3 = False
@@ -186,7 +197,7 @@ while True:
                     break
             continue
 
-        #time of measuremernt
+        #time of the temperature measuremernt
         t = time.perf_counter() - tstart
 
         #print stuffs
@@ -210,26 +221,35 @@ while True:
         else:
             temps = np.append(np.transpose(np.array([temp])),temps, axis = 1)
 
-
-        if len(ts)>=boxLen:
+        #updates the times aray
+        if len(ts)>=rampBoxLen:
                 ts = np.delete(np.append(np.array([t]),ts),len(ts))
         else:
             ts = np.append(np.array([t]),ts)
-
+        
+        
+        #calculates the current ramprate
         if len(ts)>1:
             for i in range(len(ramp)):
                 dsum = 0
-                for j in range(len(errs[i])-1):
+                for j in range(len(temps[i])-1):
                     dsum += (temps[i][j+1]-temps[i][j])/(ts[j+1]-ts[j])
                 ramp[i] = dsum/(len(temps[i]))
 
 
         #find the set value
         if setFile == True:
+            endFile = True
             for i in range(len(setData[0])):
                 if setData[0][i]>t:
                     setPoint = setData[1][i-1]
+                    endFile = False
                     break
+            #exits the firing if the text file is finished
+            if endFile == True:
+                print('end of firing Schedule')
+                break
+            
                 
         #uncouples the zones when the slowzone is less than the minimum Ramp
         setPoints[slowZone[0]-1] = setPoint
@@ -308,7 +328,7 @@ while True:
 
     ##########################################################################################
     ###############################################################################################
-#bad stuffs
+#bad stuffs  get here by some error or if the firing is finished
 for i in range(len(zones)):
         gpio.output(int(zones[i]),gpio.LOW)
 print("Power Off")
