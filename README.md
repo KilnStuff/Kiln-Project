@@ -58,6 +58,16 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
   ## Wiring of SSR's
   
   ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG_20190606_142939.jpg)
+  
+  ## Pi Wiring
+  
+  Heres some text for wiring and stuff. Here's the wiring diagram:
+  
+  ## SSR Circuit Diagram
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/relayCircut.PNG)
+  
+  ## Thermocouple Circuit Diagram
+  ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/themoCircut.PNG)
 
 # Building Process
 
