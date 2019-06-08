@@ -114,9 +114,7 @@ Before using the raspberry pi with the thermocouple boards, the MAX31855 library
 
 ## Getting Coefficients
 
-
-
-
+The first constants we aquired were the coeficents for power loss out of each of the zones. We mesuered these by going through each zone and seting one of the zones to full power then measureing the temperatures at equilibrium. By assumung the power loss scales linealy with the diffence to external temperature this gave us a system of three equations with three unknowns allowing us to solve for dissipation coeficents which had a value of about 2 to 0.5. The next chalenge was to find the coeficents of the PID itself. We decided to set the value of P for each zone by deciding what the minimum value for the error we wanted the coils to be on at full power. We decide this value to be 10 degrees, mean that if the kiln was more than 10 degrees below the set point it would apply full power to the coils. P = (maxPower)/(minError) ~ 100 to 200. We decided that we wanted the values of I to be on the same order of magnitude as the disipative constants because the have a similar effect while still being proporional to the power that the coils can deliver. So we just scaled down our value of P down by 100 to get I. For the D coefitient we wanted it to still be porpotional to the max power of the coils and because sticking to a specific ramp rate is crutial to us we decided keep it relitivly large compared to I. This lead us to decide D = P/10. However during later tests we noticed some oscilations that we thought were form the derivitve term so we decresed this to P/20.
 
 
 While trying to create the best PID for our system, we tried 3 different methods, each with different results. A slight inconvenience to our system was that the 3rd zone on the kiln (the one lowest to the ground) was significantly slower at ramping its power than the above 2 zones. The last 2 PID's take this into account in different ways.
