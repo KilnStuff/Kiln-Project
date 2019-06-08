@@ -97,7 +97,7 @@ Here's the wiring diagram:
 
 # Building Process
 
-There were several considerations that needed to be taken into account when constructing this project. To allow for port holes to still be accessible so that we could look inside the kiln, we needed to drill additional holes for the thermocouples. If instead we put the thermocouples in the normal port holes, then our temperature control system would think the temperature in the kiln had drastically decreased when we take a thermocouple out to look inside, therefore driving the power way up inside the kiln (when in fact is does not need to). However while drilling these new holes we had to take into account that we were drilling fire brick, so we needed to take special consideration. (MORE TEXT)
+There were several considerations that needed to be taken into account when constructing this project. The first main chalenge was how to instal the thermocouples. Previously they were placed inside of the portholes that already existed on the kiln, and were removed temporaraly whenever we needed to look inside of the kiln. However, with the PID controling the kiln removing the thermocouples was no longer an option as this sudden change in measured temperature would throw off the controler driving the power way up inside the kiln (when in fact is does not need to). To allow for port holes to still be accessible so that we could look inside the kiln, we needed to drill additional holes for the thermocouples. However while drilling these new holes we had to take into account that we were drilling fire brick, so we needed to take special consideration. Fire brick is especially soft and brittle, and we needed to be very gental while drilling the holes in order to avoid breaking the bricks. To make things more difficult the kiln is also wraped in a steel sheet metal, which is not easy to drill through gently. We decided that the best way to go about driling these holes would be to first drill the sheet metal by starting with a small bit and slowly incrementing up in bit size to the final hole size. By slowly going up in bit size we minimized the shock we put into the firebrick each time we punched throught the fire brick. Then we drilled from the inside of the kiln out throught the fire brick. We decided to drill out this way because the sheet metal will support the backside of the brick and help prevent any blowout while drilling. When drilling the firebrick it would probably be best to use a masonary bit, but we had no issues using a standard drill bit due to how stof the material is. Also be sure to **not** use a hammer drill or you will destroy the firebrick. 
 
 
 Here are the 1/2 inch holes we drilled for the thermocouples:
@@ -110,7 +110,14 @@ Before using the raspberry pi with the thermocouple boards, the MAX31855 library
 
 # Designing a PID
 
-Getting Coefficients
+
+
+## Getting Coefficients
+
+
+
+
+
 
 While trying to create the best PID for our system, we tried 3 different methods, each with different results. A slight inconvenience to our system was that the 3rd zone on the kiln (the one lowest to the ground) was significantly slower at ramping its power than the above 2 zones. The last 2 PID's take this into account in different ways.
 
