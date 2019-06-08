@@ -106,6 +106,8 @@ Here are the 1/2 inch holes we drilled for the thermocouples:
 
 # Code
 
+Before using the raspberry pi with the thermocouple boards, the MAX31855 library must be installed. The following site has all the necessary information for doing so: https://learn.adafruit.com/thermocouple/python-circuitpython#python-installation-of-max31855-library-4-6 This even gives sample code for reading from the thermocouple boards if you are interested in writing your own program.
+
 # Designing a PID
 
 Getting Coefficients
