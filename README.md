@@ -140,9 +140,22 @@ The main issue with this version of the PID was that the upper 2 zones were roug
 
 In addition to the PID we also implemented "firing schedules", which give an array of desired temperatures the PID should set as its goal for a given time. These live in the form of a text file that the PID calls upon to reference. These firing schedules allow us to tailor our PID to the specific type of firing we desire, such as a bisque or glaze firing (which have different desired final temperatures). The code for the bisque and glaze firing schedules, as well as each PID are within the repository. 
 
+Another issue we encountered at high temperatures was the thermocouples shorting to ground the vast majority of measurements. 
+
 # Finished Product and Data
 
+Overall this project was extremely successful. Not only does it fire ceramics on its own with minimal user interaction (after itializing it) but also it is significantly cheaper than most electric temperature controlling kilns. Below are examples of many ceramics that have all been fired in the modified kiln:
 
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/20190607_231628.jpg)
+
+## Cookies!
+
+As a last test, we decided to bake cookies in our kiln, just to see if it was feasible. It worked! We set the temperature to 190 C and placed them in for 7 minutes or so (the primary measurement was looking inside and seeing if the cookies looked ready). Here are some pictures of the cookies we baked inside (and for the record, they were delicious).
+
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG955889.jpg)
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG955899.jpg
 
 
 # Contributors
+
+This project was made for Phys CS 15C lab class at UCSB with the aid of Trevor Anderberg, Ohr Benshlomo, and Brian Kent.
