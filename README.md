@@ -10,7 +10,7 @@
 * [Building Process](https://github.com/KilnStuff/Kiln-Project#building-process)
 * [Code](https://github.com/KilnStuff/Kiln-Project#Code)
 * [Designing A PID](https://github.com/KilnStuff/Kiln-Project#designing-a-pid)
-* [Finished Product and Data](https://github.com/KilnStuff/Kiln-Project#finished-product-and-data)
+* [Finished Product and Data](https://github.com/KilnStuff/Kiln-Project#finished-product)
 * [Contributors](https://github.com/KilnStuff/Kiln-Project#contributors)
 
 
@@ -142,7 +142,7 @@ In addition to the PID we also implemented "firing schedules", which give an arr
 
 Another issue we encountered at high temperatures was the thermocouples shorting to ground the vast majority of measurements. 
 
-# Finished Product and Data
+# Finished Product
 
 Overall this project was extremely successful. Not only does it fire ceramics on its own with minimal user interaction (after itializing it) but also it is significantly cheaper than most electric temperature controlling kilns. Below are examples of many ceramics that have all been fired in the modified kiln:
 
@@ -153,7 +153,7 @@ Overall this project was extremely successful. Not only does it fire ceramics on
 As a last test, we decided to bake cookies in our kiln, just to see if it was feasible. It worked! We set the temperature to 190 C and placed them in for 7 minutes or so (the primary measurement was looking inside and seeing if the cookies looked ready). Here are some pictures of the cookies we baked inside (and for the record, they were delicious).
 
 ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG955889.jpg)
-![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG955899.jpg
+![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/IMG955899.jpg)
 
 
 # Contributors
