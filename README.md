@@ -10,7 +10,7 @@
 * [Building Process](https://github.com/KilnStuff/Kiln-Project#building-process)
 * [Code](https://github.com/KilnStuff/Kiln-Project#Code)
 * [Designing A PID](https://github.com/KilnStuff/Kiln-Project#designing-a-pid)
-* [Finished Product and Data](https://github.com/KilnStuff/Kiln-Project#finished-product)
+* [Finished Product](https://github.com/KilnStuff/Kiln-Project#finished-product)
 * [Contributors](https://github.com/KilnStuff/Kiln-Project#contributors)
 
 
