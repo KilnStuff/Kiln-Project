@@ -61,7 +61,31 @@ The total came out to roughly ~$400 with shipping costs. Overall, this investmen
   
   ## Pi Wiring
   
-  Heres some text for wiring and stuff. Here's the wiring diagram:
+The wiring of the Raspberry Pi’s hat is separated into two separate circuits. One circuit is what controls the SSRs through the GPIO pins, and the other circuit communicates with the thermocouple amplifier boards to read off the temperature.
+  
+SSR Circuit-
+To run SSRs of the type we are using, the 3.3V supplied directly from the pi’s GPIO pins is insufficient to fully close the SSRs and have them allow current through. Instead, a 5V supply must be used, but because the Pi does not support 5V directly from the GPIO, transistors must be used instead.
+
+In this circuit (below), the relevant GPIO pin on the pi is attached through an LED and then 100 ohm resistor, in series, to the base wire of one of the three transistors. The emitter is connected directly to ground, while the collector connects to the V- leg of the DC side of the SSR. Meanwhile, the V+ leg is wired directly to the + terminal on the power supply. 
+
+In this system, when the GPIO is supplying voltage to the base of the transistor, the transistor closes the circuit and allows 5V current to flow from the power supply to ground (the – terminal on the power supply).
+
+Meanwhile, on the AC side of the SSRs, one leg of the AC side is connected directly to the coil, while the other leg connects to one of the lines coming from the breaker. The other line goes directly from the breaker to the coil. This circuit allows current to pass through the SSR only when the GPIO is supplying voltage to the transistor, and therefore the power supply is in turn supplying voltage to the SSR.
+
+Thermocouple Circuit-
+
+The thermocouples have two sides, a thermocouple side which connects the board to the thermocouple, and a Pi side which connects the board to the Pi. The thermocouple side is straightforward, the positive wire of the thermocouple connects to the positive screw terminal, and the negative side to the negative screw terminal. These should of course be marked on the board and the thermocouple, but when in doubt check the data sheets to make sure which is which. If connected backwards, the thermocouple will read a reduction in temperature rather than an increase.
+
+If your MAX31855 does not already have a capacitor soldered to the leads of the screw terminals under the board, it is highly recommended to solder a capacitor between them, we used 10 picoFarads but anything less than 0.1 microFarad should work.
+For the Pi side of things, between the boards the Vin, Gnd, Do, and CLK pins were all tied to the same pins on the other boards (not to each other of course). To clarify, the Vin on one board was connected to the Vin on the other two, then the same was done between the Gnds, and so on.
+
+For connections to the Pi, the 3.3V pin from the Pi was connected to the Vin of one board (and therefore all the boards since they’re connected together). The same was done for the GND pin on the Pi to the GND on the board, the MOSI pin on the pi to the DO pin on the board, and the CLK pin on the Pi to the CLK pin on the board. To find the relevant pins on your raspberry pi, refer to a pinout diagram of your Raspberry Pi and see directions for setting up the circuit with CircuitPython https://learn.adafruit.com/thermocouple/python-circuitpython .
+
+For the CS pin, the boards should not be connected together. Instead, one CS pin should be connected to GPIO 4 on the Pi, one to GPIO 25, and one to GPIO 12. Once again, refer to a pinout diagram to find where the relevant GPIO pins are, as they are scattered seemingly randomly across the pins.
+
+Finally, place a capacitor, 100nf works, across the 3.3V and GND connections to the first board. This will help reduce the effect noise has on your system, much like the capacitors across the screw terminal leads.
+
+Here's the wiring diagram:
   
   ## SSR Circuit Diagram
   ![alt text](https://github.com/KilnStuff/Kiln-Project/blob/master/relayCircut.PNG)
